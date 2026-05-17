@@ -50,11 +50,36 @@ public class ECommerceController {
         return null;
     }
 
+    // ==================== USER MANAGEMENT (Admin) ====================
+    public List<User> getAllUsers() {
+        return new ArrayList<>(users);
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+
+    public void removeUser(User user) {
+        users.remove(user);
+    }
+
+    // ==================== PRODUCT MANAGEMENT (Seller) ====================
     public List<Product> getAllProducts() {
         return products;
     }
 
     public void addProduct(Product product) {
         products.add(product);
+    }
+
+    public void updateProduct(Product oldProduct, Product newProduct) {
+        int index = products.indexOf(oldProduct);
+        if (index != -1) {
+            products.set(index, newProduct);
+        }
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
     }
 }

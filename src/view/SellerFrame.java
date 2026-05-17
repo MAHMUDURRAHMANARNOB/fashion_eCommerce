@@ -54,6 +54,124 @@
 //     }
 // }
 
+// package view;
+
+// import model.*;
+// import controller.ECommerceController;
+
+// import javax.swing.*;
+// import java.awt.*;
+// import java.util.List;
+
+// public class SellerFrame extends JFrame {
+
+//     private Seller seller;
+//     private ECommerceController controller;
+
+//     public SellerFrame(Seller seller, ECommerceController controller) {
+//         this.seller = seller;
+//         this.controller = controller;
+//         initUI();
+//     }
+
+//     private void initUI() {
+//         setTitle("Seller Panel - " + seller.getName());
+//         setSize(800, 600);
+//         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//         setLocationRelativeTo(null);
+//         setLayout(new BorderLayout());
+
+//         JPanel topPanel = new JPanel();
+//         topPanel.add(new JLabel("Seller Dashboard", SwingConstants.CENTER));
+//         add(topPanel, BorderLayout.NORTH);
+
+//         JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 15, 15));
+//         buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+//         JButton addProductBtn = new JButton("Add New Product");
+//         JButton manageProductsBtn = new JButton("Manage Products");
+//         JButton viewInventoryBtn = new JButton("Show Inventory");
+//         JButton salesAnalyticsBtn = new JButton("Sales Analytics");
+//         JButton logoutBtn = new JButton("Logout");
+
+//         addProductBtn.addActionListener(e -> addNewProduct());
+//         manageProductsBtn.addActionListener(e -> manageProducts());
+//         viewInventoryBtn.addActionListener(e -> showInventory());
+//         salesAnalyticsBtn.addActionListener(e -> showSalesAnalytics());
+//         logoutBtn.addActionListener(e -> logout());
+
+//         buttonPanel.add(addProductBtn);
+//         buttonPanel.add(manageProductsBtn);
+//         buttonPanel.add(viewInventoryBtn);
+//         buttonPanel.add(salesAnalyticsBtn);
+//         buttonPanel.add(logoutBtn);
+
+//         add(buttonPanel, BorderLayout.CENTER);
+//     }
+
+//     private void addNewProduct() {
+//         JTextField nameField = new JTextField();
+//         JTextField priceField = new JTextField();
+//         JTextField descField = new JTextField();
+
+//         Object[] message = {
+//             "Product Name:", nameField,
+//             "Description:", descField,
+//             "Base Price ($):", priceField
+//         };
+
+//         int option = JOptionPane.showConfirmDialog(this, message, "Add New Product", JOptionPane.OK_CANCEL_OPTION);
+//         if (option == JOptionPane.OK_OPTION) {
+//             try {
+//                 String name = nameField.getText();
+//                 String desc = descField.getText();
+//                 double price = Double.parseDouble(priceField.getText());
+
+//                 Product newProduct = new Product("P" + System.currentTimeMillis(), name, desc, price);
+//                 controller.addProduct(newProduct);
+//                 JOptionPane.showMessageDialog(this, "Product added successfully!");
+//             } catch (Exception ex) {
+//                 JOptionPane.showMessageDialog(this, "Invalid input!");
+//             }
+//         }
+//     }
+
+//     private void manageProducts() {
+//         JOptionPane.showMessageDialog(this, "Full Product Management (Add/Edit/Delete) coming in next version.\nCurrently supports Add Product.");
+//     }
+
+//     private void showInventory() {
+//         StringBuilder sb = new StringBuilder("=== Current Inventory ===\n\n");
+//         for (Product p : controller.getAllProducts()) {
+//             sb.append(p.getName()).append("\n");
+//             for (ProductVariant v : p.getVariants()) {
+//                 sb.append("   • ").append(v.getColor()).append(" / ").append(v.getSize())
+//                   .append(" → Stock: ").append(v.getStockQuantity()).append("\n");
+//             }
+//             sb.append("\n");
+//         }
+//         JTextArea textArea = new JTextArea(sb.toString());
+//         textArea.setEditable(false);
+//         JOptionPane.showMessageDialog(this, new JScrollPane(textArea), "Inventory", JOptionPane.INFORMATION_MESSAGE);
+//     }
+
+//     private void showSalesAnalytics() {
+//         String analyticsText = "📊 Sales Analytics\n\n"
+//                 + "Total Revenue: $2,847.50\n"
+//                 + "Total Orders: 18\n"
+//                 + "Top Selling Product: Nike Air Max\n"
+//                 + "Top Color: Black\n"
+//                 + "Conversion Rate: 68%\n\n"
+//                 + "Performance: Excellent 🎉\n";
+//         JOptionPane.showMessageDialog(this, analyticsText, "Sales Analytics", JOptionPane.INFORMATION_MESSAGE);
+//     }
+
+//     private void logout() {
+//         dispose();
+//         new LoginFrame().setVisible(true);
+//     }
+// }
+
 package view;
 
 import model.*;
@@ -76,40 +194,36 @@ public class SellerFrame extends JFrame {
 
     private void initUI() {
         setTitle("Seller Panel - " + seller.getName());
-        setSize(800, 600);
+        setSize(850, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        JPanel topPanel = new JPanel();
-        topPanel.add(new JLabel("Seller Dashboard", SwingConstants.CENTER));
-        add(topPanel, BorderLayout.NORTH);
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 20, 20));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 15, 15));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        JButton addProductBtn = new JButton("Add New Product");
-        JButton manageProductsBtn = new JButton("Manage Products");
-        JButton viewInventoryBtn = new JButton("Show Inventory");
-        JButton salesAnalyticsBtn = new JButton("Sales Analytics");
+        JButton addProductBtn = new JButton("➕ Add New Product");
+        JButton manageProductsBtn = new JButton("📦 Manage Products");
+        JButton inventoryBtn = new JButton("📋 View Inventory");
+        JButton analyticsBtn = new JButton("📊 Sales Analytics");
         JButton logoutBtn = new JButton("Logout");
 
         addProductBtn.addActionListener(e -> addNewProduct());
         manageProductsBtn.addActionListener(e -> manageProducts());
-        viewInventoryBtn.addActionListener(e -> showInventory());
-        salesAnalyticsBtn.addActionListener(e -> showSalesAnalytics());
+        inventoryBtn.addActionListener(e -> showInventory());
+        analyticsBtn.addActionListener(e -> showSalesAnalytics());
         logoutBtn.addActionListener(e -> logout());
 
         buttonPanel.add(addProductBtn);
         buttonPanel.add(manageProductsBtn);
-        buttonPanel.add(viewInventoryBtn);
-        buttonPanel.add(salesAnalyticsBtn);
-        buttonPanel.add(logoutBtn);
+        buttonPanel.add(inventoryBtn);
+        buttonPanel.add(analyticsBtn);
 
         add(buttonPanel, BorderLayout.CENTER);
+        add(logoutBtn, BorderLayout.SOUTH);
     }
 
-    private void addNewProduct() {
+        private void addNewProduct() {
         JTextField nameField = new JTextField();
         JTextField priceField = new JTextField();
         JTextField descField = new JTextField();
@@ -136,11 +250,12 @@ public class SellerFrame extends JFrame {
         }
     }
 
+
     private void manageProducts() {
-        JOptionPane.showMessageDialog(this, "Full Product Management (Add/Edit/Delete) coming in next version.\nCurrently supports Add Product.");
+        new ProductManagementDialog(this, controller).setVisible(true);
     }
 
-    private void showInventory() {
+        private void showInventory() {
         StringBuilder sb = new StringBuilder("=== Current Inventory ===\n\n");
         for (Product p : controller.getAllProducts()) {
             sb.append(p.getName()).append("\n");
@@ -156,18 +271,20 @@ public class SellerFrame extends JFrame {
     }
 
     private void showSalesAnalytics() {
-        String analyticsText = "📊 Sales Analytics\n\n"
-                + "Total Revenue: $2,847.50\n"
-                + "Total Orders: 18\n"
-                + "Top Selling Product: Nike Air Max\n"
-                + "Top Color: Black\n"
-                + "Conversion Rate: 68%\n\n"
-                + "Performance: Excellent 🎉\n";
-        JOptionPane.showMessageDialog(this, analyticsText, "Sales Analytics", JOptionPane.INFORMATION_MESSAGE);
+    String analyticsText = "📊 Sales Analytics\n\n"
+            + "Total Revenue: $2,847.50\n"
+            + "Total Orders: 18\n"
+            + "Top Selling Product: Nike Air Max\n"
+            + "Top Color: Black\n"
+            + "Conversion Rate: 68%\n\n"
+            + "Performance: Excellent 🎉\n";
+    JOptionPane.showMessageDialog(this, analyticsText, "Sales Analytics", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void logout() {
         dispose();
         new LoginFrame().setVisible(true);
     }
+    
+
 }
